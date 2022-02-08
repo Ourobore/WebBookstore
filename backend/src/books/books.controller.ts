@@ -33,8 +33,8 @@ export class BooksController {
   }
 
   @Delete()
-  async deleteBook(@Query('bookID') bookID: string) {
-    const books = await this.booksService.deleteBook(bookID);
+  async deleteBook(@Query('bookID') key: string) {
+    const books = await this.booksService.deleteBook(key);
     return books;
   }
 }

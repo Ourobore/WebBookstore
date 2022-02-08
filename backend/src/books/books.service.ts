@@ -1,4 +1,4 @@
-import { Injectable, HttpException } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { BOOKS } from '../mocks/books.mock';
 import { CreateBookDTO } from './dto/create-book.dto';
 
@@ -35,7 +35,7 @@ export class BooksService {
     return new Promise((resolve) => {
       let index = this.books.findIndex((book) => book.id === id);
       if (index === -1) {
-        throw new HttpException('Book does not exist!', 404);
+        throw new HttpException('Book does not exist!', HttpStatus.NOT_FOUND);
       }
       this.books.splice(index, 1);
       resolve(this.books);

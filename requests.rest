@@ -3,7 +3,7 @@
 @port = 3000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
-@bookId = 11
+@bookId = 6
 
 ###
 
