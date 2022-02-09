@@ -3,7 +3,7 @@ import { BOOKS } from '../mocks/books.mock';
 import { CreateBookDTO } from './dto/create-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
-import Book from './book.entity';
+import Book from '../entity/book.entity';
 
 @Injectable()
 export class BooksService {
@@ -14,24 +14,24 @@ export class BooksService {
     private booksRepository: Repository<Book>,
   ) {}
 
-  getAllBooks(): Promise<any> {
+  getAllBooks(): Promise<Book[]> {
     return new Promise((resolve) => {
       resolve(this.booksRepository.find());
     });
   }
 
-  getBook(bookID: string): Promise<any> {
+  getBook(bookID: string): Promise<Book> {
     const id = Number(bookID);
     return new Promise((resolve) => {
       const book = this.booksRepository.findOne(id);
       if (!book) {
-        throw new HttpException('Book does not exist!', 404);
+        throw new HttpException('Book does not exist!', HttpStatus.NOT_FOUND);
       }
       resolve(book);
     });
   }
 
-  createBook(book: CreateBookDTO) {
+  createBook(book: CreateBookDTO): Promise<Book> {
     return new Promise((resolve) => {
       const newBook = this.booksRepository.create(book);
       this.booksRepository.save(newBook);
@@ -39,7 +39,7 @@ export class BooksService {
     });
   }
 
-  deleteBook(bookID: string): Promise<any> {
+  deleteBook(bookID: string): Promise<Book[]> {
     const id = Number(bookID);
     return new Promise((resolve) => {
       const deleteResponse = this.booksRepository.delete(id);

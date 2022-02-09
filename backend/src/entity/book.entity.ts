@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class Book {
   @PrimaryGeneratedColumn()
-  public id: number;
+  private id: number;
 
   @Column()
   public title: string;
