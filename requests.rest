@@ -3,7 +3,7 @@
 @port = 3000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
-@bookId = 6
+@bookId = 3
 
 ###
 
@@ -24,9 +24,9 @@ Content-Type: {{contentType}}
 
 {
     "id": 11,
-    "title": "Mario",
+    "title": "Itsi Me!",
     "description": "A book wrote by Mario?",
-    "author": "Itsi Me"
+    "author": "Mario"
 }
 
 ###

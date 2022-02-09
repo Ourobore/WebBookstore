@@ -15,8 +15,8 @@ export class BooksController {
   constructor(private booksService: BooksService) {}
 
   @Get()
-  async getBooks() {
-    const books = await this.booksService.getBooks();
+  async getAllBooks() {
+    const books = await this.booksService.getAllBooks();
     return books;
   }
 
@@ -28,7 +28,7 @@ export class BooksController {
 
   @Post()
   async addBook(@Body() createBookDTO: CreateBookDTO) {
-    const book = await this.booksService.addBook(createBookDTO);
+    const book = await this.booksService.createBook(createBookDTO);
     return book;
   }
 
