@@ -1,31 +1,31 @@
-version: "3"
+version: '3'
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres-bookstore
     image: postgres:latest
     ports:
-    - "5432:5432"
+      - '5431:5432'
     volumes:
-    - /data/postgres:/data/postgres
+      - /data/postgres-bookstore:/data/postgres-bookstore
     env_file:
-    - docker.env
+      - docker.env
     networks:
-    - postgres
- 
+      - bookstore
+
   pgadmin:
     links:
-    - postgres:postgres
-    container_name: pgadmin
+      - postgres:postgres
+    container_name: pgadmin-bookstore
     image: dpage/pgadmin4
     ports:
-    - "8080:80"
+      - '9090:80'
     volumes:
-    - /data/pgadmin:/root/.pgadmin
+      - /data/pgadmin-bookstore:/root/.pgadmin-bookstore
     env_file:
-    - docker.env
+      - docker.env
     networks:
-    - postgres
- 
+      - bookstore
+
 networks:
-  postgres:
+  bookstore:
     driver: bridge

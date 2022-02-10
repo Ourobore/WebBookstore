@@ -21,9 +21,7 @@ import * as Joi from '@hapi/joi';
     }),
     DatabaseModule,
   ],
-  controllers: [],
-  providers: [],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

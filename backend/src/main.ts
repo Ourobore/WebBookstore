@@ -5,14 +5,20 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Setting up OpenAPI document
   const config = new DocumentBuilder()
-    .setTitle('Books example')
-    .setDescription('The books API description')
+    .setTitle('WebBookstore')
+    .setDescription('The WebBookstore API description')
     .setVersion('1.0')
-    .addTag('books')
+    // .addTag('books')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  await app.listen(3000);
+
+  // Starting up the server
+  const PORT: number = 3000;
+  await app.listen(PORT);
+  console.log(`\n-> Server started on port ${PORT}\n`);
 }
 bootstrap();
