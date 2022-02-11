@@ -26,6 +26,41 @@ services:
     networks:
       - bookstore
 
+    dev:
+      container_name: bookstore_api_dev
+      image: bookstore-api-dev:1.0.0
+      build:
+        context: .
+        target: development
+        dockerfile: ./Dockerfile
+      command: npm run start:dev
+      ports:
+        - 3000:3000
+        - 9229:9229
+      networks:
+        - bookstore
+      volumes:
+        - .:/home/lchapren/WebBookstore/backend
+        - /home/lchapren/WebBookstore/backend/node_modules
+      restart: unless-stopped
+    prod:
+      container_name: bookstore_api_prod
+      image: bookstore-api-prod:1.0.0
+      build:
+        context: .
+        target: production
+        dockerfile: ./Dockerfile
+      command: npm run start:prod
+      ports:
+        - 3000:3000
+        - 9229:9229
+      networks:
+        - bookstore
+      volumes:
+        - .:/home/lchapren/WebBookstore/backend
+        - /home/lchapren/WebBookstore/backend/node_modules
+      restart: unless-stopped
+
 networks:
   bookstore:
     driver: bridge
