@@ -36,6 +36,8 @@ services:
   #     - postgres
   #   ports:
   #     - 4000:3000
+  #   volumes:
+  #     - api
   #   networks:
   #     - default
   #   # volumes:
@@ -46,6 +48,7 @@ services:
 volumes:
   postgres:
   pgadmin:
+  api:
 
 networks:
   default:

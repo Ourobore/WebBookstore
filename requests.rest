@@ -1,6 +1,6 @@
 ### Requests done with REST-Client for VSCode (humao.rest-client) ###
 @hostname = localhost
-@port = 3000
+@port = 4000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 @bookId = 1
@@ -23,12 +23,16 @@ POST http://{{host}}/books
 Content-Type: {{contentType}}
 
 {
-    "id": 11,
+    "isbn": 11,
     "title": "Itsi Me!",
     "description": "A book wrote by Mario?",
     "author": "Mario"
 }
-
+###
+    "author": {
+        "lastName": "Shroom",
+        "firstName": "Mario"
+    }
 ###
 
 // Delete a specific book

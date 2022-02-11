@@ -14,7 +14,7 @@ async function bootstrap() {
     // .addTag('books')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('/', app, document);
 
   // Starting up the server
   const PORT: number = 4000;
