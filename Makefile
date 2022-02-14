@@ -1,15 +1,17 @@
 # Juste a little Makefile to easily manipulate docker-compose
 
-all: up dev
+all: up
 
 up:
-	-docker-compose up -d -V
+	-docker-compose up -V -d
 
 stop:
 	-docker-compose stop
 
 down:
 	-docker-compose down -v
+
+###
 
 api:
 	-cd backend && npm start

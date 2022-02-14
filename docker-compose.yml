@@ -3,52 +3,50 @@ services:
   postgres:
     container_name: postgres-bookstore
     image: postgres:14
-    ports:
-      - 5431:5432
-    volumes:
-      - postgres:/data/postgres-bookstore
     env_file:
       - backend/docker.env
+    ports:
+      - 5431:5432
     networks:
       - default
+    volumes:
+      - postgres:/data/postgres-bookstore
+    restart: unless-stopped
 
   pgadmin:
     container_name: pgadmin-bookstore
     image: dpage/pgadmin4:6
-    ports:
-      - 9090:80
-    volumes:
-      - pgadmin:/root/.pgadmin-bookstore
     env_file:
       - backend/docker.env
+    ports:
+      - 9090:80
     networks:
       - default
+    volumes:
+      - pgadmin:/root/.pgadmin-bookstore
+    restart: unless-stopped
 
-  # api:
-  #   container_name: api-bookstore
-  #   image: api-bookstore:1.0.0
-  #   build:
-  #     context: ./backend
-  #     # target: development
-  #     dockerfile: ./Dockerfile
-  #   command: npm run start:dev
-  #   depends_on:
-  #     - postgres
-  #   ports:
-  #     - 4000:3000
-  #   volumes:
-  #     - api
-  #   networks:
-  #     - default
-  #   # volumes:
-  #   #  - .:/home/lchapren/WebBookstore/backend
-  #   #  - /home/lchapren/WebBookstore/backend/node_modules
-  #   restart: unless-stopped
+  api:
+    container_name: api-bookstore
+    image: api-bookstore:1.0.0
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    command: npm run start:dev
+    depends_on:
+      - postgres
+    ports:
+      - 3000:3000
+    networks:
+      - default
+    volumes:
+      - ./backend:/usr/app
+      - /usr/app/node_modules
+    restart: unless-stopped
 
 volumes:
   postgres:
   pgadmin:
-  api:
 
 networks:
   default:
