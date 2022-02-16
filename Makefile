@@ -1,5 +1,19 @@
-# Juste a little Makefile to easily manipulate docker-compose
+# Juste a little Makefile to easily manipulate docker-compose and dev environment
 
+### Dev environment ###
+dev: database backend frontend
+
+frontend:
+	-zsh && cd frontend && npm run dev
+
+backend: database
+	-zsh && cd backend && npm run start:dev
+
+database:
+	-docker-compose up -d postgres pgadmin
+
+
+### Prod environment ###
 all: up
 
 build:
@@ -25,10 +39,5 @@ ps:
 images:
 	-docker-compose images
 
-###
 
-api:
-	-cd backend && npm start
-
-dev:
-	-cd backend && npm run start:dev
+.PHONY: frontend backend
