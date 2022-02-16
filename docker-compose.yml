@@ -26,9 +26,28 @@ services:
       - pgadmin:/root/.pgadmin-bookstore
     restart: unless-stopped
 
-  api:
-    container_name: api-bookstore
-    image: api-bookstore:1.0.0
+  frontend:
+    container_name: frontend-bookstore
+    image: frontend-bookstore:1.0.0
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    # command: tail -f /dev/null
+    # command: npm run build && npx serve -l 3000 -s dist
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+    networks:
+      - default
+    volumes:
+      - ./frontend:/usr/app
+      - /usr/app/node_modules
+    restart: unless-stopped
+
+  backend:
+    container_name: backend-bookstore
+    image: backend-bookstore:1.0.0
     build:
       context: ./backend
       dockerfile: ./Dockerfile
@@ -36,7 +55,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - 3000:3000
+      - 4000:4000
     networks:
       - default
     volumes:

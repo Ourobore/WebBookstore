@@ -14,10 +14,11 @@ async function bootstrap() {
     // .addTag('books')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/', app, document);
+  SwaggerModule.setup('/api', app, document);
 
   // Starting up the server
-  const PORT: number = 3000;
+  const PORT: number = 4000;
+  app.enableCors();
   await app.listen(PORT);
   console.log(`\n-> Server started on port ${PORT}\n`);
 }

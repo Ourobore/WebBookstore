@@ -2,14 +2,28 @@
 
 all: up
 
+build:
+	-docker-compose build
+
 up:
-	-docker-compose up -V -d
+	-docker-compose up -V 
+
+down:
+	-docker-compose down -v
+
+start:
+	-docker-compose start
 
 stop:
 	-docker-compose stop
 
-down:
-	-docker-compose down -v
+###
+
+ps:
+	-docker-compose ps
+
+images:
+	-docker-compose images
 
 ###
 
